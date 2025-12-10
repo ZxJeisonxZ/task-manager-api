@@ -80,10 +80,20 @@ python manage.py runserver
 
 ## Ejecución con Docker
 
-Debes ejecutar:
+Debes realizar lo siguiente:
 
 ```bash
-docker-compose up --build
+# 1. Construir y ejecutar
+docker-compose up -d --build
+
+# 2. Ejecutar migraciones
+docker-compose exec web python manage.py migrate
+
+# 3. Crear superusuario
+docker-compose exec web python manage.py createsuperuser --username admin --email admin@example.com
+
+# 4. Iniciar el servidor
+docker-compose exec web python manage.py runserver 0.0.0.0:8000
 ```
 
 ## Endpoints
