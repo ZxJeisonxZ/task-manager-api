@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: taskdb
+      POSTGRES_USER: taskuser
+      POSTGRES_PASSWORD: taskpassword
+    ports:
+      - "5433:5432"
+
+  web:
+    build: .
+    command: sleep infinity
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://taskuser:taskpassword@db:5432/taskdb
+      SECRET_KEY: django-insecure-docker-secret-key-change-in-production
+      DEBUG: "True"

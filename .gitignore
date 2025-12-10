@@ -26,15 +26,6 @@ local_settings.py
 db.sqlite3
 media/
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
 # IDE
 .vscode/
 .idea/
@@ -48,7 +39,3 @@ Thumbs.db
 # Database (PostgreSQL en desarrollo)
 *.sqlite3
 *.db
-
-# Docker
-docker-compose.override.yml
-.env

@@ -1,0 +1,57 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">
+                    <i class="bi bi-lock"></i> Iniciar Sesión
+                </h3>
+                
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    Usuario o contraseña incorrectos.
+                </div>
+                {% endif %}
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <!-- Campo oculto para el parámetro 'next' -->
+                    <input type="hidden" name="next" value="{{ next }}">
+                    
+                    <div class="mb-3">
+                        <label for="username" class="form-label">
+                            <i class="bi bi-person"></i> Usuario
+                        </label>
+                        <input type="text" name="username" class="form-control" id="username" required autofocus>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="password" class="form-label">
+                            <i class="bi bi-key"></i> Contraseña
+                        </label>
+                        <input type="password" name="password" class="form-control" id="password" required>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-box-arrow-in-right"></i> Entrar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <h5>Credenciales de prueba:</h5>
+            <div class="card">
+                <div class="card-body">
+                    <p class="mb-1"><strong>Superusuario:</strong> jeison / 123</p>
+                    <p class="mb-0"><strong>Usuario normal:</strong> test / 123</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

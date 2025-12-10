@@ -1,0 +1,124 @@
+{% extends 'tasks/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h1>
+            <i class="bi bi-check2-square"></i> Gestor de Tareas
+        </h1>
+    </div>
+    <div class="col-md-6 text-end">
+        <button class="btn btn-success" onclick="showCreateModal()">
+            <i class="bi bi-plus-circle"></i> Nueva Tarea
+        </button>
+    </div>
+</div>
+
+<!-- Filtros -->
+<div class="row mb-3">
+    <div class="col-md-6">
+        <div class="btn-group" role="group" id="filter-buttons">
+            <button class="btn btn-filter active btn-secondary" data-filter="all" onclick="filterTasks('all')">
+                Todas
+            </button>
+            <button class="btn btn-filter btn-outline-warning" data-filter="pendiente" onclick="filterTasks('pendiente')">
+                Pendientes
+            </button>
+            <button class="btn btn-filter btn-outline-success" data-filter="completada" onclick="filterTasks('completada')">
+                Completadas
+            </button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Buscar tareas..."
+               onkeyup="searchTasks(this.value)">
+    </div>
+</div>
+
+<!-- Loading -->
+<div id="loading" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p class="mt-2">Cargando tareas...</p>
+</div>
+
+<!-- Lista de tareas -->
+<div id="tasks-container" class="row">
+    <!-- Las tareas se cargan automaticamente -->
+</div>
+
+<!-- Modal para crear/editar -->
+<div class="modal fade" id="taskModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="taskForm" onsubmit="saveTask(); return false;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Nueva Tarea</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Título *</label>
+                        <input type="text" class="form-control" id="title" required>
+                        <div class="invalid-feedback" id="titleError">
+                            El título es obligatorio
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Estado</label>
+                        <select class="form-select" id="status">
+                            <option value="pendiente">Pendiente</option>
+                            <option value="completada">Completada</option>
+                        </select>
+                    </div>
+                    
+                    <input type="hidden" id="taskId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="saveTaskButton">
+                        Guardar Tarea
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div class="modal fade" id="confirmModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">¿Estás seguro de que quieres eliminar esta tarea?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmButton">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/task_manager.js' %}"></script>
+{% endblock %}
