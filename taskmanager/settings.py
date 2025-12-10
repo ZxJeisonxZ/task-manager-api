@@ -28,6 +28,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-key-for-dev')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
+# Configuracion actual funcional para ejecucion en dispositivos locales
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 

@@ -103,9 +103,3 @@ Para mas informacion acerca de los endpoints, revisa `urls.py` dentro de la app 
 - `python manage.py showmigrations` - ver migraciones
 - `python manage.py makemigrations` - generar migraciones
 - `python manage.py migrate` - migrar
-
-## Observaciones específicas encontradas al revisar el proyecto
-
-- Se encontraron archivos: `Dockerfile` y `docker-compose.yml`. El `docker-compose` contiene los servicios.
-- El archivo `.env` existe en el repositorio para ejemplo de uso de la API.
-- La configuración de la base de datos en `settings.py` usa variables de entorno y PostgreSQL. Revisa que las variables en `.env` coincidan con `docker-compose` si usas Docker.
