@@ -26,6 +26,9 @@ local_settings.py
 db.sqlite3
 media/
 
+# Environments
+.venv
+
 # IDE
 .vscode/
 .idea/
